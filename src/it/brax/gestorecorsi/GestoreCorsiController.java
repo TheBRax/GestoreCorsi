@@ -85,6 +85,9 @@ public class GestoreCorsiController {
     		if (model.cbPeriodValueValidation(cbPeriodValue)) {	// non ha else perché nel caso dell'else viene lanciata IllegalArgumentException
     			courseByPeriod = model.getCourseByPeriod(cbPeriodValue);
     			taResult.clear();
+    			taResult.appendText("-----------------------------------------------------------------\n");
+    			taResult.appendText(String.format("%7s%52s%6s\n", "CODINS", "NAME", "PD"));
+    			taResult.appendText("-----------------------------------------------------------------\n");
     			for (Course c : courseByPeriod) {
     				taResult.appendText(c.toString() + "\n");
     			}
@@ -112,8 +115,11 @@ public class GestoreCorsiController {
     		if (model.cbPeriodValueValidation(cbPeriodValue)) {	// non ha else perché nel caso dell'else viene lanciata IllegalArgumentException
     			studentByPeriod = model.getStudentByPeriod(cbPeriodValue);
     			taResult.clear();
-    			Integer aux = studentByPeriod.size();
-    			taResult.appendText(aux.toString());
+//    			Integer aux = studentByPeriod.size();
+//    			taResult.appendText(aux.toString());
+    			taResult.appendText("------------------------------------------------------------------------\n");
+    			taResult.appendText(String.format("%10s%5s%52s%5s\n", "STD.SERIAL", "PD", "COURSE", "TOT"));
+    			taResult.appendText("------------------------------------------------------------------------\n");
     			for (StudentByPeriod s : studentByPeriod) {
     				taResult.appendText(s.toString() + "\n");
     			}

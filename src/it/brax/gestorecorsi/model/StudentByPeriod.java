@@ -61,7 +61,8 @@ public class StudentByPeriod {
 	}
 	@Override
 	public String toString() {
-		return String.format("%s,    \t%s,    \t%s, %s", codins, pd, nome, tot);
+		return String.format("%10s%5s%52s%5s", codins, pd, nome, tot);
 	}
+	
 	
 }

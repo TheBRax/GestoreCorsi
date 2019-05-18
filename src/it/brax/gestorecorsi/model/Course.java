@@ -61,7 +61,8 @@ public class Course {
 	}
 	@Override
 	public String toString() {
-		return codins + "\t - " + nome;
+		return String.format("%7s%52s%6s", codins, nome, pd);
 	}
+	
 	
 }
