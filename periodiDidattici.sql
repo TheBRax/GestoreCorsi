@@ -1,0 +1,1 @@
+select distinct c.pd from iscritticorsi.corso as c order by pd asc;
