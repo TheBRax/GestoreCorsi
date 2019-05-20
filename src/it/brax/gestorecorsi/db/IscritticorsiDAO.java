@@ -15,7 +15,7 @@ import it.brax.gestorecorsi.model.StudentByCourse;
 public class IscritticorsiDAO {
 
 	public static List<StudentByCourse> getStudentByCourse(String codins) throws SQLException, IOException {
-		String query = "SELECT c.codins, c.nome, s.matricola, s.cognome, s.nome, s.CDS " + 
+		String query = "SELECT c.codins, c.nome as 'courseName', s.matricola, s.cognome, s.nome, s.CDS " + 
 				"FROM iscritticorsi.studente as s, iscritticorsi.corso AS c, iscritticorsi.iscrizione as i " + 
 				"WHERE i.codins = ? AND s.matricola = i.matricola AND c.codins = i.codins";
 		List<StudentByCourse> studentByCourse = new LinkedList<StudentByCourse>();
@@ -26,7 +26,7 @@ public class IscritticorsiDAO {
 		) {
 			while(rs.next()) {
 				studentByCourse.add(new StudentByCourse(rs.getString("codins"),
-						rs.getString("nome"), rs.getString("matricola"), rs.getString("cognome"), 
+						rs.getString("CourseName"), rs.getString("matricola"), rs.getString("cognome"), 
 						rs.getString("nome"), rs.getString("CDS")));
 			}
 			return studentByCourse;

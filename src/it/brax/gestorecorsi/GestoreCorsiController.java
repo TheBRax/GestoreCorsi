@@ -141,9 +141,10 @@ public class GestoreCorsiController {
 			if (model.cbCourseValueValidation(cbCourseValue)) {
 				Students = model.getStudentByCourse(cbCourseValue);
 				taResult.clear();
-				taResult.appendText("-------------------\n");
-				taResult.appendText(String.format("%7s%52s%10s%15s%15s%7s\n", "CODINS", "COURSE NAME", "STD.SERIAL", "STD.SURNAME", "STD.NAME", "CDS"));
-				taResult.appendText("-------------------\n");
+				//taResult.appendText(cbCourseValue);
+				taResult.appendText("----------------------------------------------------------------------------------------------------------------------------------------------\n");
+				taResult.appendText(String.format("%7s%52s%13s%30s%30s%10s\n", "CODINS", "COURSE NAME", "STD.SERIAL", "STD.SURNAME", "STD.NAME", "CDS"));
+				taResult.appendText("----------------------------------------------------------------------------------------------------------------------------------------------\n");
 				for (StudentByCourse s : Students) {
 					taResult.appendText(s.toString() + "\n");
 				}

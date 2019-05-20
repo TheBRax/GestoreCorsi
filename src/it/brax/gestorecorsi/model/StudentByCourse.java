@@ -19,10 +19,10 @@ public class StudentByCourse {
 	}
 	@Override
 	public String toString() {
-		return String.format("%7s%52s%10s%15s%15s%7s",
+		return String.format("%7s%52s%13s%30s%30s%10s",
 				codins, courseName, matricola, cognome, nome, CDS);
 	}
 	
-	
+	//"%7s%52s%10s%15s%15s%7s\n", "CODINS", "COURSE NAME", "STD.SERIAL", "STD.SURNAME", "STD.NAME", "CDS"
 
 }
