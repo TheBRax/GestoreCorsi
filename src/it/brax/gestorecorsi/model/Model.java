@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
+import it.brax.gestorecorsi.db.IscritticorsiDAO;
 import it.brax.gestorecorsi.db.corsoDAO;
 
 public class Model {
@@ -22,8 +23,8 @@ public class Model {
 		List<Course> courses = getCourses();
 		List<String> courseIdentification = new LinkedList<String>();
 		for (Course c : courses) {
-			if (!(courseIdentification.contains(c.toString())))
-				courseIdentification.add(c.toString());
+			if (!(courseIdentification.contains(c.toString2())))
+				courseIdentification.add(c.toString2());
 		}
 		return courseIdentification;
 	}
@@ -42,6 +43,23 @@ public class Model {
 			return true;
 		else
 			throw new IllegalArgumentException();
+	}
+
+	public boolean cbCourseValueValidation(String cbCourseValue) throws FileNotFoundException, SQLException, IOException {
+		List<String> courseIdentifications = getCourseIdentifications();
+		if (courseIdentifications.contains(cbCourseValue))
+			return true;
+		else
+			throw new IllegalArgumentException();
+	}
+
+	public List<StudentByCourse> getStudentByCourse(String cbCourseValue) throws SQLException, IOException {
+		int codinsPosition = cbCourseValue.indexOf(" ");
+		if (codinsPosition != -1) {
+			String codins = cbCourseValue.substring(codinsPosition);
+			return IscritticorsiDAO.getStudentByCourse(codins);
+		} else 
+			return null;
 	}
 
 }

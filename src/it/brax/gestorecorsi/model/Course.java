@@ -36,6 +36,10 @@ public class Course {
 		this.nome = nome;
 		this.pd = pd;
 	}
+	public Course(String codins) {
+		super();
+		this.codins = codins;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -61,7 +65,10 @@ public class Course {
 	}
 	@Override
 	public String toString() {
-		return String.format("%7s%52s%6s", codins, nome, pd);
+		return String.format("%7s%5s%52s", codins, pd, nome);
+	}
+	public String toString2() {
+		return codins + " - " + nome;
 	}
 	
 	

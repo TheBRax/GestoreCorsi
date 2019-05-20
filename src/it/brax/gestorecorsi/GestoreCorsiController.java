@@ -8,6 +8,7 @@ import java.util.List;
 import it.brax.gestorecorsi.model.Course;
 import it.brax.gestorecorsi.model.Model;
 import it.brax.gestorecorsi.model.Student;
+import it.brax.gestorecorsi.model.StudentByCourse;
 import it.brax.gestorecorsi.model.StudentByPeriod;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -85,9 +86,9 @@ public class GestoreCorsiController {
     		if (model.cbPeriodValueValidation(cbPeriodValue)) {	// non ha else perché nel caso dell'else viene lanciata IllegalArgumentException
     			courseByPeriod = model.getCourseByPeriod(cbPeriodValue);
     			taResult.clear();
-    			taResult.appendText("-----------------------------------------------------------------\n");
-    			taResult.appendText(String.format("%7s%52s%6s\n", "CODINS", "NAME", "PD"));
-    			taResult.appendText("-----------------------------------------------------------------\n");
+    			taResult.appendText("----------------------------------------------------------------\n");
+    			taResult.appendText(String.format("%7s%5s%52s\n", "CODINS", "PD", "COURSE NAME"));
+    			taResult.appendText("----------------------------------------------------------------\n");
     			for (Course c : courseByPeriod) {
     				taResult.appendText(c.toString() + "\n");
     			}
@@ -115,11 +116,9 @@ public class GestoreCorsiController {
     		if (model.cbPeriodValueValidation(cbPeriodValue)) {	// non ha else perché nel caso dell'else viene lanciata IllegalArgumentException
     			studentByPeriod = model.getStudentByPeriod(cbPeriodValue);
     			taResult.clear();
-//    			Integer aux = studentByPeriod.size();
-//    			taResult.appendText(aux.toString());
-    			taResult.appendText("------------------------------------------------------------------------\n");
-    			taResult.appendText(String.format("%10s%5s%52s%5s\n", "STD.SERIAL", "PD", "COURSE", "TOT"));
-    			taResult.appendText("------------------------------------------------------------------------\n");
+    			taResult.appendText("---------------------------------------------------------------------\n");
+    			taResult.appendText(String.format("%7s%5s%52s%5s\n", "CODINS", "PD", "COURSE NAME", "TOT"));
+    			taResult.appendText("---------------------------------------------------------------------\n");
     			for (StudentByPeriod s : studentByPeriod) {
     				taResult.appendText(s.toString() + "\n");
     			}
@@ -135,7 +134,26 @@ public class GestoreCorsiController {
 
     @FXML
     void btStudents_onActionHandler(ActionEvent event) {
+    	List<StudentByCourse> Students = new LinkedList<StudentByCourse>();
+    	String cbCourseValue = null;
+    	cbCourseValue = cbCourse.getValue();
+    	try {
+			if (model.cbCourseValueValidation(cbCourseValue)) {
+				Students = model.getStudentByCourse(cbCourseValue);
+				taResult.clear();
+				taResult.appendText("-------------------\n");
+				taResult.appendText(String.format("%7s%52s%10s%15s%15s%7s\n", "CODINS", "COURSE NAME", "STD.SERIAL", "STD.SURNAME", "STD.NAME", "CDS"));
+				taResult.appendText("-------------------\n");
+				for (StudentByCourse s : Students) {
+					taResult.appendText(s.toString() + "\n");
+				}
+			}
+		} catch (SQLException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
 
     }
-}
 
+}
