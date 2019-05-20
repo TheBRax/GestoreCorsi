@@ -10,6 +10,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import it.brax.gestorecorsi.model.Student;
+import it.brax.gestorecorsi.model.StudentByCDS;
 import it.brax.gestorecorsi.model.StudentByCourse;
 
 public class IscritticorsiDAO {
@@ -37,6 +38,33 @@ public class IscritticorsiDAO {
 		} catch (IOException e) {
 			throw new IOException();
 		}
+	}
+	
+	public static List<StudentByCDS> getStudentByCDS(String codins) throws SQLException, IOException {
+		String query = "SELECT c.codins, c.nome AS 'courseName', COUNT(i.matricola) AS 'totStd', s.CDS " + 
+				"FROM iscritticorsi.corso AS c, iscritticorsi.iscrizione AS i, iscritticorsi.studente AS s " + 
+				"WHERE i.codins = ? AND i.matricola = s.matricola AND i.codins = c.codins " + 
+				"GROUP BY CDS";
+		List<StudentByCDS> studentByCDS = new LinkedList<StudentByCDS>();
+		try (
+			Connection conn = IscritticorsiConnect.getConnection();
+			PreparedStatement st = createOneParamenterPreparedStatement(conn, query, codins);
+			ResultSet rs = st.executeQuery();
+		) {
+			while(rs.next()) {
+				studentByCDS.add(new StudentByCDS(rs.getString("codins"),
+						rs.getString("courseName"), rs.getString("totStd"), 
+						rs.getString("CDS")));
+			}
+			return studentByCDS;
+		} catch (FileNotFoundException e) {
+			throw new FileNotFoundException();
+		} catch (SQLException e) {
+			throw new SQLException();
+		} catch (IOException e) {
+			throw new IOException();
+		}
+		
 	}
 	
 	private static PreparedStatement createOneParamenterPreparedStatement(Connection conn, String query, String arg) throws SQLException {

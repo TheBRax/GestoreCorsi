@@ -64,4 +64,14 @@ public class Model {
 			
 	}
 
+	public List<StudentByCDS> getStudentByCDS(String cbCourseValue) throws SQLException, IOException {
+		int codinsPosition = cbCourseValue.indexOf(" ");
+		if (codinsPosition != -1) {
+			String codins = cbCourseValue.substring(0, codinsPosition);
+			return IscritticorsiDAO.getStudentByCDS(codins);
+		} else { 
+			return null;
+		}
+	}
+
 }
