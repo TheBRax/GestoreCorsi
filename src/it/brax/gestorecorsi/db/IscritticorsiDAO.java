@@ -9,7 +9,6 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
-import it.brax.gestorecorsi.model.Student;
 import it.brax.gestorecorsi.model.StudentByCDS;
 import it.brax.gestorecorsi.model.StudentByCourse;
 

@@ -7,7 +7,6 @@ import java.util.List;
 
 import it.brax.gestorecorsi.model.Course;
 import it.brax.gestorecorsi.model.Model;
-import it.brax.gestorecorsi.model.Student;
 import it.brax.gestorecorsi.model.StudentByCDS;
 import it.brax.gestorecorsi.model.StudentByCourse;
 import it.brax.gestorecorsi.model.StudentByPeriod;
@@ -112,9 +111,9 @@ public class GestoreCorsiController {
 	    	if (model.cbCourseValueValidation(cbCourseValue)){
 	    		Students = model.getStudentByCDS(cbCourseValue);
 	    		taResult.clear();
-	    		taResult.appendText("---\n");
+	    		taResult.appendText("------------------------------------------------------------------------------\n");
 	    		taResult.appendText(String.format("%7s%52s%10s%9s\n","CODINS", "COURSE NAME", "STD.TOT.", "CDS" ));
-	    		taResult.appendText("---\n");
+	    		taResult.appendText("------------------------------------------------------------------------------\n");
 	    		for (StudentByCDS s : Students) {
 	    			taResult.appendText(s.toString() + "\n");
 	    		}
